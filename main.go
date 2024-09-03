@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand/v2"
 	"net/http"
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -10,8 +11,10 @@ import (
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	metric.HelloWorldCounter.Inc()
+	euros := rand.IntN(10)
+	metric.SalesCounter.Add(float64(euros))
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Hello World"))
+	w.Write([]byte(fmt.Sprintf("Hello World for %d euros", euros)))
 }
 
 func main() {
