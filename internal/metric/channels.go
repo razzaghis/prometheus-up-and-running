@@ -54,8 +54,8 @@ var LastServedGauge = prometheus.NewGauge(
 )
 
 // LatencyHelloWorld is used for recording the latency if Hello World requests
-var LatencyHelloWorld = prometheus.NewSummary(
-	prometheus.SummaryOpts{
+var LatencyHelloWorld = prometheus.NewHistogram(
+	prometheus.HistogramOpts{
 		Namespace: "ns",
 		Subsystem: "test",
 		Name:      "hello_world_latency_seconds",

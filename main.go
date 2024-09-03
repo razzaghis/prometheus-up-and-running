@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand/v2"
 	"net/http"
 	"time"
 
@@ -16,6 +17,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello World"))
 	metric.LastServedGauge.SetToCurrentTime()
 	metric.InProgressGauge.Dec()
+	time.Sleep(time.Duration(rand.IntN(100)) * time.Millisecond)
 	metric.LatencyHelloWorld.Observe(time.Since(startTime).Seconds())
 }
 
