@@ -10,13 +10,13 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
+	startTime := time.Now()
 	metric.InProgressGauge.Inc()
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Hello World"))
 	metric.LastServedGauge.SetToCurrentTime()
-	// add sleep time to see the in progress metrics
-	time.Sleep(10 * time.Second)
 	metric.InProgressGauge.Dec()
+	metric.LatencyHelloWorld.Observe(time.Since(startTime).Seconds())
 }
 
 func main() {

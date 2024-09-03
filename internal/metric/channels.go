@@ -10,6 +10,7 @@ func init() {
 	prometheus.MustRegister(SalesCounter)
 	prometheus.MustRegister(InProgressGauge)
 	prometheus.MustRegister(LastServedGauge)
+	prometheus.MustRegister(LatencyHelloWorld)
 }
 
 // HelloWorldCounter is used for recording the count of hello world messages
@@ -49,5 +50,15 @@ var LastServedGauge = prometheus.NewGauge(
 		Subsystem: "test",
 		Name:      "hello_world_last_time_seconds",
 		Help:      "The last time a Hello World was served.",
+	},
+)
+
+// LatencyHelloWorld is used for recording the latency if Hello World requests
+var LatencyHelloWorld = prometheus.NewSummary(
+	prometheus.SummaryOpts{
+		Namespace: "ns",
+		Subsystem: "test",
+		Name:      "hello_world_latency_seconds",
+		Help:      "Time for a request Hello World.",
 	},
 )
