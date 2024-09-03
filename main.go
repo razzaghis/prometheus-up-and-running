@@ -17,7 +17,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello World"))
 	metric.LastServedGauge.SetToCurrentTime()
 	metric.InProgressGauge.Dec()
-	time.Sleep(time.Duration(rand.IntN(100)) * time.Millisecond)
+	time.Sleep(time.Duration(rand.IntN(10)) * time.Millisecond)
 	metric.LatencyHelloWorld.Observe(time.Since(startTime).Seconds())
 }
 

@@ -60,5 +60,6 @@ var LatencyHelloWorld = prometheus.NewHistogram(
 		Subsystem: "test",
 		Name:      "hello_world_latency_seconds",
 		Help:      "Time for a request Hello World.",
+		Buckets:   []float64{0.0001, 0.0002, 0.0005, 0.001, 0.01, 0.1},
 	},
 )
